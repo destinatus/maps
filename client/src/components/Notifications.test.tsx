@@ -4,6 +4,25 @@ import Notifications from './Notifications';
 import { SocketProvider } from '../context/SocketContext';
 import * as socketHooks from '../context/SocketContext';
 
+// Define the interface for the socket context
+interface Notification {
+  id: number;
+  type: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+  cellSiteId?: string;
+}
+
+interface SocketContextType {
+  notifications: Notification[];
+  isConnected: boolean;
+  reconnectAttempts: number;
+  markNotificationAsRead: (id: number) => void;
+  markAllNotificationsAsRead: () => void;
+  clearNotifications: () => void;
+}
+
 // Mock the useSocket hook
 jest.mock('../context/SocketContext', () => {
   const originalModule = jest.requireActual('../context/SocketContext');
@@ -14,7 +33,7 @@ jest.mock('../context/SocketContext', () => {
 });
 
 // Type for the mocked useSocket function
-type MockUseSocket = jest.Mock<ReturnType<typeof socketHooks.useSocket>>;
+type MockUseSocket = jest.Mock<SocketContextType>;
 
 describe('Notifications Component', () => {
   // Mock notification data
