@@ -1,0 +1,384 @@
+.app {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.map-container {
+  flex: 1;
+  height: 100%;
+  transition: margin-right 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sidebar {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  border-left: 1px solid #ddd;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 10;
+}
+
+/* Sidebar toggle button for mobile */
+.sidebar-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 85%;
+    max-width: 350px;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+  }
+  
+  .sidebar.hidden {
+    transform: translateX(100%);
+  }
+  
+  .sidebar.visible {
+    transform: translateX(0);
+  }
+  
+  .map-container.map-pushed {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 769px) {
+  .sidebar.hidden {
+    display: flex; /* Always show on desktop */
+  }
+}
+
+.search-panel {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  flex-shrink: 0;
+  overflow-y: auto;
+  max-height: 50vh;
+}
+
+.site-details-container {
+  padding: 15px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* Scrollbar styling for better UX */
+.search-panel::-webkit-scrollbar,
+.site-details-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-panel::-webkit-scrollbar-track,
+.site-details-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.search-panel::-webkit-scrollbar-thumb,
+.site-details-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.search-panel::-webkit-scrollbar-thumb:hover,
+.site-details-container::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.site-details {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 15px;
+}
+
+.site-details h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.site-details p {
+  margin: 8px 0;
+  color: #666;
+}
+
+.site-meta {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.alerts-section,
+.tasks-section {
+  margin: 15px 0;
+}
+
+.alerts-section h3,
+.tasks-section h3 {
+  margin: 10px 0 5px;
+  color: #444;
+}
+
+.alerts-section ul,
+.tasks-section ul {
+  padding-left: 20px;
+  margin: 5px 0;
+}
+
+.alerts-section li {
+  padding: 3px 0;
+}
+
+.tasks-section li {
+  padding: 3px 0;
+}
+
+.status-active {
+  color: #28a745;
+}
+
+.status-maintenance {
+  color: #ffc107;
+}
+
+.status-outage {
+  color: #dc3545;
+}
+
+.alert-critical {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.alert-warning {
+  color: #ffc107;
+}
+
+.alert-info {
+  color: #17a2b8;
+}
+
+.task-pending {
+  color: #6c757d;
+}
+
+.task-in-progress {
+  color: #007bff;
+}
+
+.task-completed {
+  color: #28a745;
+}
+
+/* Saved Searches Styles */
+.saved-searches {
+  margin: 15px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.saved-searches-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.saved-searches-header h3 {
+  margin: 0;
+  color: #333;
+}
+
+.save-search-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.save-search-btn:hover {
+  background-color: #0069d9;
+}
+
+.saved-searches-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.saved-search-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.saved-search-item:last-child {
+  border-bottom: none;
+}
+
+.saved-search-info {
+  flex: 1;
+}
+
+.saved-search-info h4 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.saved-search-info p {
+  margin: 0 0 5px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.saved-search-criteria {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.saved-search-criteria span {
+  background-color: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+.saved-search-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.load-search-btn, .delete-search-btn {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.load-search-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.load-search-btn:hover {
+  background-color: #218838;
+}
+
+.delete-search-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-search-btn:hover {
+  background-color: #c82333;
+}
+
+.save-search-dialog {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  margin-bottom: 15px;
+}
+
+.save-search-dialog h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.dialog-buttons button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dialog-buttons .primary-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.dialog-buttons .primary-btn:hover {
+  background-color: #0069d9;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.loading {
+  color: #666;
+  font-style: italic;
+  padding: 10px 0;
+}
+
+.no-saved-searches {
+  color: #666;
+  font-style: italic;
+  padding: 10px 0;
+}

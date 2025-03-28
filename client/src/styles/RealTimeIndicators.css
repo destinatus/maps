@@ -1,0 +1,138 @@
+/* Real-time update indicators */
+.update-indicator {
+  background-color: #28a745;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 8px;
+  animation: pulse 2s infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Status indicators */
+.status-active {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.status-maintenance {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.status-outage, .status-deleted {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+/* Alert indicators */
+.alert-critical {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.alert-warning {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.alert-info {
+  color: #17a2b8;
+  font-weight: bold;
+}
+
+/* Task indicators */
+.task-pending {
+  color: #6c757d;
+  font-style: italic;
+}
+
+.task-in-progress {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.task-completed {
+  color: #28a745;
+  text-decoration: line-through;
+}
+
+/* Popup styles for Leaflet */
+.leaflet-popup-content {
+  min-width: 200px;
+}
+
+.leaflet-popup-content h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #343a40;
+}
+
+.leaflet-popup-content p {
+  margin: 4px 0;
+}
+
+/* Animation for marker updates */
+@keyframes markerPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.marker-updated {
+  animation: markerPulse 1.5s ease-in-out;
+}
+
+/* Connection status indicator in map */
+.map-connection-status {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.connection-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.connection-indicator.connected {
+  background-color: #28a745;
+}
+
+.connection-indicator.disconnected {
+  background-color: #dc3545;
+}
+
+.connection-indicator.connecting {
+  background-color: #ffc107;
+  animation: pulse 1s infinite;
+}
