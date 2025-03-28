@@ -1,0 +1,120 @@
+/* SearchResults.css */
+.search-results {
+  margin-top: 20px;
+}
+
+.search-results h3 {
+  margin-bottom: 15px;
+  color: #343a40;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Tile Grid Layout */
+.site-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.site-tile {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.site-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.site-tile h4 {
+  margin: 0 0 10px 0;
+  color: #343a40;
+  font-size: 1rem;
+  font-weight: 600;
+  /* Ensure long names don't overflow */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.tile-meta span {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Technology badges */
+.tech-5g {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.tech-lte {
+  background-color: #cfe2ff;
+  color: #0d6efd;
+}
+
+.tech-mmwave {
+  background-color: #e2d9f3;
+  color: #6f42c1;
+}
+
+.tech-unknown {
+  background-color: #e9ecef;
+  color: #495057;
+}
+
+/* Status badges - reusing existing status classes */
+.status-active {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-maintenance {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-inactive, .status-outage {
+  background-color: #f8d7da;
+  color: #842029;
+}
+
+/* Empty state */
+.no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+  color: #6c757d;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  margin-top: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .site-tiles {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

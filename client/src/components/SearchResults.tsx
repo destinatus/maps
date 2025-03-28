@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/SearchResults.css';
 
 interface CellSite {
   id: string;
@@ -13,29 +14,43 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({ results, onSelectSite }) => {
+  // Helper function to normalize technology string for CSS class
+  const normalizeTechClass = (tech: string): string => {
+    // Handle comma-separated technologies
+    if (tech.includes(',')) {
+      return 'tech-' + tech.split(',')[0].trim().toLowerCase().replace(/\s+/g, '');
+    }
+    return 'tech-' + tech.toLowerCase().replace(/\s+/g, '');
+  };
+
   return (
     <div className="search-results">
       <h3>Search Results ({results.length})</h3>
       {results.length > 0 ? (
-        <ul>
+        <div className="site-tiles">
           {results.map((site) => (
-            <li key={site.id} onClick={() => onSelectSite(site)}>
-              <div className="result-item">
-                <h4>{site.name}</h4>
-                <div className="result-meta">
-                  <span className={`tech-${site.technology.toLowerCase()}`}>
-                    {site.technology}
-                  </span>
-                  <span className={`status-${site.status}`}>
-                    {site.status}
-                  </span>
-                </div>
+            <div 
+              key={site.id} 
+              className="site-tile" 
+              onClick={() => onSelectSite(site)}
+              role="button"
+              tabIndex={0}
+              aria-label={`Select ${site.name}`}
+            >
+              <h4 title={site.name}>{site.name}</h4>
+              <div className="tile-meta">
+                <span className={normalizeTechClass(site.technology)}>
+                  {site.technology}
+                </span>
+                <span className={`status-${site.status}`}>
+                  {site.status}
+                </span>
               </div>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
-        <p>No results found</p>
+        <div className="no-results">No results found</div>
       )}
     </div>
   );

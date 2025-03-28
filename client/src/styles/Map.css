@@ -3,11 +3,28 @@
   position: relative;
   height: 100%;
   width: 100%;
+  min-height: 400px; /* Ensure minimum height */
+  overflow: hidden; /* Prevent content from overflowing */
+  display: flex; /* Use flexbox for better layout control */
+  flex-direction: column;
 }
 
 .map-container-inner {
   height: 100%;
   width: 100%;
+  flex-grow: 1; /* Allow the map to fill available space */
+  position: relative; /* Ensure proper positioning context */
+  z-index: 1; /* Establish stacking context */
+}
+
+/* Ensure Leaflet container takes full size */
+.leaflet-container {
+  height: 100% !important;
+  width: 100% !important;
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 /* Loading indicator */
@@ -92,12 +109,32 @@
 /* Marker cluster customization */
 .marker-cluster {
   background-color: rgba(255, 255, 255, 0.8);
+  position: absolute !important; /* Ensure proper positioning */
 }
 
 .marker-cluster div {
   background-color: rgba(0, 123, 255, 0.7);
   color: white;
   font-weight: bold;
+  position: relative !important; /* Ensure proper positioning */
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Fix for marker cluster positioning issues */
+.leaflet-marker-icon.leaflet-div-icon {
+  position: absolute !important;
+}
+
+.leaflet-marker-pane,
+.leaflet-shadow-pane,
+.leaflet-overlay-pane {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* Responsive adjustments */
@@ -124,6 +161,50 @@
   -webkit-transform: translate3d(0, 0, 0);
   /* Fix for Firefox */
   transform: translate3d(0, 0, 0);
+}
+
+/* Fix for Leaflet controls positioning */
+.leaflet-control-container {
+  position: absolute !important;
+  z-index: 800 !important;
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  position: absolute !important;
+  z-index: 1000 !important;
+  pointer-events: none !important;
+}
+
+.leaflet-top .leaflet-control,
+.leaflet-bottom .leaflet-control {
+  pointer-events: auto !important;
+}
+
+/* Fix for popup positioning */
+.leaflet-popup {
+  position: absolute !important;
+}
+
+.leaflet-popup-content-wrapper {
+  position: relative !important;
+}
+
+/* Fix for _leaflet_pos error */
+.leaflet-map-pane {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+.leaflet-tile-pane {
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 /* High-contrast mode support */

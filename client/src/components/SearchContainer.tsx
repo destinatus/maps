@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from './SearchBar.tsx';
-import SearchResults from './SearchResults.tsx';
-import SavedSearches from './SavedSearches.tsx';
+import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
+import SavedSearches from './SavedSearches';
 
 interface SearchCriteria {
   name: string;
@@ -41,7 +41,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ onSelectSite }) => {
     try {
       setSearchCriteria(criteria);
       
-      const response = await fetch('http://localhost:3001/api/cell-sites/search', {
+      const response = await fetch('/api/cell-sites/search', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const SearchContainer: React.FC<SearchContainerProps> = ({ onSelectSite }) => {
         : [];
       
       // Transform data to match CellSite interface
-      const processedData = dataArray.map(item => ({
+      const processedData = dataArray.map((item: any) => ({
         id: item.id.toString(),
         name: item.name,
         technology: Array.isArray(item.technologies) && item.technologies.length > 0 

@@ -4,12 +4,15 @@ import SearchContainer from './components/SearchContainer.tsx';
 import Notifications from './components/Notifications.tsx';
 import SimulationControls from './components/SimulationControls.tsx';
 import CellSiteDetails from './components/CellSiteDetails.tsx';
+import SiteTiles from './components/SiteTiles.tsx';
 import { SocketProvider } from './context/SocketContext';
 import './App.css';
 import './styles/Notifications.css';
 import './styles/RealTimeIndicators.css';
 import './styles/SimulationControls.css';
 import './styles/CellSiteDetails.css';
+import './styles/SiteTiles.css';
+import './styles/SearchResults.css';
 
 function App() {
   const [cellSites, setCellSites] = useState([]);
@@ -154,7 +157,18 @@ function App() {
             <SimulationControls />
           </div>
           <div className="site-details-container">
-            <CellSiteDetails site={selectedSite} />
+            {selectedSite ? (
+              <CellSiteDetails 
+                site={selectedSite} 
+                onBack={() => setSelectedSite(null)}
+              />
+            ) : (
+              <SiteTiles 
+                sites={cellSites} 
+                onSelectSite={setSelectedSite} 
+                selectedSiteId={selectedSite?.id}
+              />
+            )}
           </div>
         </div>
         

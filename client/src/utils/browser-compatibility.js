@@ -354,9 +354,13 @@ export const cssFixes = {
       `browser-${browser.name.toLowerCase().replace(/\s+/g, '-')}`,
       `browser-version-${parseInt(browser.version, 10)}`,
       `os-${browser.os.toLowerCase()}`,
-      browser.isMobile ? 'mobile' : 'desktop',
-      browser.isTablet ? 'tablet' : ''
+      browser.isMobile ? 'mobile' : 'desktop'
     );
+    
+    // Add tablet class only if it's a tablet
+    if (browser.isTablet) {
+      document.documentElement.classList.add('tablet');
+    }
     
     // Safari-specific fixes
     if (browser.name === 'Safari') {

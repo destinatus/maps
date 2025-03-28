@@ -27,9 +27,10 @@ interface CellSite {
 
 interface CellSiteDetailsProps {
   site: CellSite | null;
+  onBack?: () => void;
 }
 
-const CellSiteDetails: React.FC<CellSiteDetailsProps> = ({ site }) => {
+const CellSiteDetails: React.FC<CellSiteDetailsProps> = ({ site, onBack }) => {
   const [activeTab, setActiveTab] = useState<'overview' | 'alerts' | 'tasks'>('overview');
 
   if (!site) {
@@ -175,10 +176,21 @@ const CellSiteDetails: React.FC<CellSiteDetailsProps> = ({ site }) => {
   return (
     <div className="cell-site-details">
       <div className="details-header">
-        <h2>{site.name}</h2>
-        <div className={`site-status ${getStatusClass(site.status)}`}>
-          {site.status}
+        <div className="header-top">
+          {onBack && (
+            <button 
+              className="back-button" 
+              onClick={onBack}
+              aria-label="Back to site list"
+            >
+              ← Back
+            </button>
+          )}
+          <div className={`site-status ${getStatusClass(site.status)}`}>
+            {site.status}
+          </div>
         </div>
+        <h2>{site.name}</h2>
       </div>
 
       <div className="tabs">
