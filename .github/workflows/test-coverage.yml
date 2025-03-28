@@ -1,0 +1,70 @@
+name: Test Coverage
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    
+    - name: Install server dependencies
+      run: |
+        cd server
+        npm ci
+    
+    - name: Install client dependencies
+      run: |
+        cd client
+        npm ci
+    
+    - name: Run server tests with coverage
+      run: |
+        cd server
+        npm run test:coverage
+        npm run test:badges
+    
+    - name: Run client tests and generate coverage
+      run: |
+        cd client
+        npm run test:coverage
+    
+    - name: Generate coverage badges
+      run: |
+        cd client
+        npm run test:badges
+    
+    - name: Upload client coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        directory: ./client/coverage/
+        flags: client
+        name: client-coverage
+        
+    - name: Upload server coverage reports to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        directory: ./server/coverage/
+        flags: server
+        name: server-coverage
+    
+    - name: Commit updated badges
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: "docs: update coverage badges [skip ci]"
+        file_pattern: "client/coverage/badges/*.svg server/coverage/*.svg README.md"

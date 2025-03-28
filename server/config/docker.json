@@ -1,0 +1,22 @@
+{
+  "server": {
+    "port": 3002,
+    "host": "0.0.0.0",
+    "env": "production"
+  },
+  "db": {
+    "name": "cellmapper",
+    "user": "cellmapper",
+    "password": "cellmapper",
+    "host": "postgres",
+    "port": 5432,
+    "ssl": false,
+    "timezone": "America/Chicago",
+    "dialect": "postgres"
+  },
+  "redis": {
+    "host": "redis",
+    "port": 6379,
+    "cacheTTL": 3600
+  }
+}

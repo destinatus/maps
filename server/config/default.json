@@ -1,0 +1,22 @@
+{
+  "server": {
+    "port": 3002,
+    "host": "localhost",
+    "env": "development"
+  },
+  "db": {
+    "name": "cell_sites",
+    "user": "postgres",
+    "password": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "ssl": false,
+    "timezone": "America/Chicago",
+    "dialect": "postgres"
+  },
+  "redis": {
+    "host": "localhost",
+    "port": 6380,
+    "cacheTTL": 3600
+  }
+}

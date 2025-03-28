@@ -1,0 +1,40 @@
+{
+  "name": "cell-site-mapping",
+  "version": "1.0.0",
+  "description": "Cell Site Mapping Application with real-time updates and interactive visualization",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd server && npm start\" \"cd client && npm start\"",
+    "install-all": "npm install && cd server && npm install && cd ../client && npm install",
+    "test": "node scripts/run-tests.js",
+    "test:badges": "node scripts/generate-placeholder-badges.js",
+    "check-deps": "node scripts/check-dependencies.js",
+    "build": "cd client && npm run build",
+    "init-db": "cd server && npm run init-db",
+    "load-test": "cd server && node scripts/load-test.js",
+    "pretest": "npm run check-deps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/cell-site-mapping.git"
+  },
+  "keywords": [
+    "cell-site",
+    "mapping",
+    "real-time",
+    "visualization",
+    "react",
+    "node",
+    "postgresql",
+    "socket.io"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yourusername/cell-site-mapping/issues"
+  },
+  "homepage": "https://github.com/yourusername/cell-site-mapping#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
